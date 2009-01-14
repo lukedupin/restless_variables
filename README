@@ -1,0 +1,31 @@
+RestlessVariables
+=================
+
+Restless_Variables are a different mind set.  Instead of the division of
+instance variables and user posted variables feeling clunky, they now feel 
+equal.  This is done by a special naming scheme that changes the rules about
+how web programing is done.
+
+
+Example
+=======
+
+Inside application.rb
+
+require 'restless_variables'
+
+class ApplicationController < ActionController::Base
+    #Called by the user to to convert thier variables
+  around_filter :restless_variable_filter
+  include RestlessVariables
+end
+
+Now if a form posts the variable "username" under the login form.
+@_login.username can be used instead of params[:login][:username]
+
+Storing sesison variables is a snap!
+instead of 
+	session[:uid] = 8
+use this
+@__uid = 8
+
