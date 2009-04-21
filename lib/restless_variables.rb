@@ -87,6 +87,7 @@ module RestlessVariables
 		end
 	end
 
+=begin
 	#################
 	# Class Methods #
 	#################
@@ -104,4 +105,14 @@ module RestlessVariables
 	def self.included(base)
 		base.extend(ClassMethods)
 	end
+=end
+end
+
+  #Extend the application
+class ApplicationController < ActionController::Base
+  def restless_variable_filter
+    load_variables( params, session.data, cookies )
+    yield
+    store_variables( instance_variables )
+  end
 end
