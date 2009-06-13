@@ -94,7 +94,7 @@ module RestlessVariables
 		#Extend application controller right now so the filter will find its hook
 	module ClassMethods
 		def restless_variable_filter
-			load_variables( params, session.data, cookies )
+			load_variables( params, session.to_hash, cookies )
 			yield
 			store_variables( instance_variables )
 		end
@@ -111,7 +111,7 @@ end
   #Extend the application
 class ApplicationController < ActionController::Base
   def restless_variable_filter
-    load_variables( params, session.data, cookies )
+    load_variables( params, session.to_hash, cookies )
     yield
     store_variables( instance_variables )
   end
